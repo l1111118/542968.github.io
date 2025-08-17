@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>想对你说的话</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#F87171',
+                        secondary: '#A78BFA',
+                        accent: '#FBBF24',
+                        light: '#FEF3C7',
+                        dark: '#4B5563'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .heart-beat {
+                animation: heartbeat 1.5s ease-in-out infinite;
+            }
+            .float {
+                animation: float 6s ease-in-out infinite;
+            }
+            .fade-in {
+                animation: fadeIn 1s ease-in forwards;
+            }
+            .slide-up {
+                animation: slideUp 0.8s ease-out forwards;
+            }
+            .scale-in {
+                animation: scaleIn 0.6s ease-out forwards;
+            }
+            .pulse {
+                animation: pulse 2s infinite;
+            }
+            .bounce-slow {
+                animation: bounceSlow 2s infinite;
+            }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(248, 113, 113, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(248, 113, 113, 0);
+            }
+        }
+        
+        @keyframes bounceSlow {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 to-purple-50 min-h-screen font-sans text-dark overflow-x-hidden">
+    <!-- 页面加载动画 -->
+    <div id="loader" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+        <div class="relative">
+            <div class="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-primary font-medium">
+                加载中...
+            </div>
+        </div>
+    </div>
+
+    <!-- 主容器 -->
+    <div id="content" class="opacity-0 transition-opacity duration-1000">
+        <!-- 顶部装饰 -->
+        <div class="absolute top-0 left-0 right-0 h-32 overflow-hidden pointer-events-none">
+            <div class="absolute top-0 left-1/4 w-20 h-20 bg-primary/20 rounded-full blur-2xl float"></div>
+            <div class="absolute top-10 left-1/2 w-24 h-24 bg-secondary/20 rounded-full blur-2xl float" style="animation-delay: 1s;"></div>
+            <div class="absolute top-5 right-1/4 w-16 h-16 bg-accent/20 rounded-full blur-2xl float" style="animation-delay: 2s;"></div>
+        </div>
+
+        <!-- 页面标题 -->
+        <header class="pt-24 pb-16 px-6 text-center opacity-0" id="header">
+            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-primary mb-4 text-shadow">
+                致特别的你
+            </h1>
+            <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 max-w-2xl mx-auto">
+                有些话，想了很久，终于鼓起勇气对你说...
+            </p>
+        </header>
+
+        <!-- 主要内容区 -->
+        <main class="max-w-4xl mx-auto px-6 pb-24">
+            <!-- 初见印象 -->
+            <section class="mb-20 opacity-0" id="section1">
+                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 transform transition-all duration-500 hover:shadow-2xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-eye text-primary text-xl"></i>
+                        </div>
+                        <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800">初次见面</h2>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        还记得第一次见到你的时候，你正在<span class="text-primary font-medium">笑着和朋友说话</span>，阳光刚好落在你的脸上，那一刻，我突然觉得周围的一切都安静了下来。
+                    </p>
+                    
+                    <p class="text-gray-700 leading-relaxed">
+                        后来才发现，你的笑容有一种特别的魔力，每次看到，都会让人不自觉地跟着开心起来。从那时候起，我就开始留意你了。
+                    </p>
+                    
+                    <div class="mt-8 flex justify-center">
+                        <button id="btn1" class="px-6 py-3 bg-primary text-white rounded-full shadow-md hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50 pulse">
+                            继续往下看 <i class="fa fa-arrow-down ml-2 bounce-slow"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 相处点滴 (默认隐藏) -->
+            <section class="mb-20 hidden" id="section2">
+                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 transform transition-all duration-500 hover:shadow-2xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-clock-o text-secondary text-xl"></i>
+                        </div>
+                        <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800">相处的点滴</h2>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        随着慢慢熟悉，我发现你有很多可爱的小习惯：
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-8">
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 hover:border-secondary/30 transition-all duration-300 transform hover:-translate-y-1">
+                            <p class="text-gray-700"><i class="fa fa-check-circle text-secondary mr-2"></i> 思考时会轻轻咬嘴唇</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 hover:border-secondary/30 transition-all duration-300 transform hover:-translate-y-1">
+                            <p class="text-gray-700"><i class="fa fa-check-circle text-secondary mr-2"></i> 听到笑话会笑得很大声</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 hover:border-secondary/30 transition-all duration-300 transform hover:-translate-y-1">
+                            <p class="text-gray-700"><i class="fa fa-check-circle text-secondary mr-2"></i> 对喜欢的事物会特别专注</p>
+                        </div>
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 hover:border-secondary/30 transition-all duration-300 transform hover:-translate-y-1">
+                            <p class="text-gray-700"><i class="fa fa-check-circle text-secondary mr-2"></i> 总是会默默帮助别人</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed">
+                        这些小细节，都让我觉得你是一个特别温暖、有趣的人。和你在一起的时候，时间总是过得特别快。
+                    </p>
+                    
+                    <div class="mt-8 flex justify-center">
+                        <button id="btn2" class="px-6 py-3 bg-secondary text-white rounded-full shadow-md hover:bg-secondary/90 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-secondary/50 pulse">
+                            还有话想对你说 <i class="fa fa-heart ml-2 bounce-slow"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 内心想法 (默认隐藏) -->
+            <section class="mb-20 hidden" id="section3">
+                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 transform transition-all duration-500 hover:shadow-2xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fa fa-heart text-accent text-xl heart-beat"></i>
+                        </div>
+                        <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800">我的心意</h2>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        其实，我已经喜欢你很久了。
+                    </p>
+                    
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        每次和你聊天，我都会紧张很久，反复斟酌要说的话；看到你和别人谈笑风生，心里会有些小小的失落；想到能和你见面，就会期待一整天。
+                    </p>
+                    
+                    <div class="bg-yellow-50 p-6 rounded-xl border border-yellow-100 my-8">
+                        <p class="text-gray-800 italic text-center">
+                            "喜欢一个人，大概就是看到所有美好的事物，都会第一个想到你。"
+                        </p>
+                    </div>
+                    
+                    <p class="text-gray-700 leading-relaxed">
+                        我不知道你是否对我也有同样的感觉，但我不想再隐藏这份心情了。无论结果如何，能认识你，已经是很幸运的事情。
+                    </p>
+                    
+                    <div class="mt-8 flex justify-center">
+                        <button id="btn3" class="px-6 py-3 bg-accent text-white rounded-full shadow-md hover:bg-accent/90 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent/50 pulse">
+                            最后的请求 <i class="fa fa-hand-paper-o ml-2 bounce-slow"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 互动部分 (默认隐藏) -->
+            <section class="mb-10 hidden" id="section4">
+                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 transform transition-all duration-500 hover:shadow-2xl text-center">
+                    <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-6">可以给我一个机会吗？</h2>
+                    
+                    <p class="text-gray-700 leading-relaxed mb-10 max-w-2xl mx-auto">
+                        如果你愿意的话，我们可以一起去看场电影，或者喝杯咖啡，就像普通朋友一样开始。
+                        无论你的答案是什么，我都会尊重你的选择。
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center gap-6 mb-8">
+                        <button id="yesBtn" class="px-8 py-4 bg-primary text-white rounded-full shadow-lg hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 focus:outline-none text-lg font-medium pulse">
+                            <i class="fa fa-thumbs-up mr-2"></i> 好呀
+                        </button>
+                        <button id="noBtn" class="px-8 py-4 bg-gray-200 text-gray-700 rounded-full shadow-md hover:bg-gray-300 transition-all duration-300 transform hover:scale-105 focus:outline-none text-lg font-medium">
+                            <i class="fa fa-thumbs-down mr-2"></i> 再考虑一下
+                        </button>
+                    </div>
+                    
+                    <div class="text-gray-500 text-sm">
+                        <p>点击按钮，告诉我你的想法吧 <i class="fa fa-smile-o"></i></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 惊喜元素 -->
+            <div id="surprise" class="fixed inset-0 pointer-events-none z-40 opacity-0 transition-opacity duration-1000">
+                <div class="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
+                    <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 transform scale-95 transition-transform duration-500" id="surpriseBox">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i class="fa fa-heart text-primary text-4xl heart-beat"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">太开心了！</h3>
+                            <p class="text-gray-700 mb-6">
+                                谢谢你愿意给我这个机会，我会好好把握的！那我们约个时间见面吧？
+                            </p>
+                            <button id="closeSurprise" class="px-6 py-3 bg-primary text-white rounded-full shadow-md hover:bg-primary/90 transition-all duration-300">
+                                好的 <i class="fa fa-smile-o ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 安慰元素 -->
+            <div id="comfort" class="fixed inset-0 pointer-events-none z-40 opacity-0 transition-opacity duration-1000">
+                <div class="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
+                    <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 transform scale-95 transition-transform duration-500" id="comfortBox">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i class="fa fa-meh-o text-gray-500 text-4xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">没关系</h3>
+                            <p class="text-gray-700 mb-6">
+                                谢谢你告诉我你的想法，我不会介意的。希望我们还能像以前一样做朋友。
+                            </p>
+                            <button id="closeComfort" class="px-6 py-3 bg-gray-200 text-gray-700 rounded-full shadow-md hover:bg-gray-300 transition-all duration-300">
+                                嗯 <i class="fa fa-handshake-o ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="bg-white/80 backdrop-blur-sm py-6 px-6 text-center text-gray-500 border-t border-gray-100">
+            <p>用了很多心思准备的页面 <i class="fa fa-heart text-primary"></i></p>
+            <p class="text-sm mt-2">希望你能感受到我的心意</p>
+        </footer>
+
+        <!-- 浮动爱心装饰 -->
+        <div class="fixed bottom-6 right-6 z-30 hidden" id="floatHeart">
+            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-primary/20 transition-all duration-300 pulse">
+                <i class="fa fa-heart text-primary text-xl"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 跟踪已解锁的部分
+        let unlockedSections = 1; // 初始只解锁第一部分
+        // 记录每个部分的位置信息
+        let sectionPositions = {};
+        
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取各部分位置信息
+            ['section1', 'section2', 'section3', 'section4'].forEach(id => {
+                const elem = document.getElementById(id);
+                if (elem) {
+                    sectionPositions[id] = elem.offsetTop;
+                }
+            });
+            
+            // 隐藏加载动画，显示内容
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('opacity-0');
+                setTimeout(function() {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('content').classList.add('opacity-100');
+                    
+                    // 依次显示各个部分
+                    setTimeout(() => {
+                        document.getElementById('header').classList.add('slide-up');
+                        document.getElementById('header').style.opacity = 1;
+                        
+                        setTimeout(() => {
+                            document.getElementById('section1').classList.add('slide-up');
+                            document.getElementById('section1').style.opacity = 1;
+                        }, 500);
+                    }, 300);
+                }, 500);
+            }, 1500);
+
+            // 按钮点击事件 - 显示下一部分并滚动
+            document.getElementById('btn1').addEventListener('click', function() {
+                // 显示第二部分
+                const section2 = document.getElementById('section2');
+                section2.classList.remove('hidden');
+                // 更新已解锁部分计数
+                unlockedSections = 2;
+                // 更新位置信息
+                sectionPositions.section2 = section2.offsetTop;
+                // 添加动画
+                setTimeout(() => {
+                    section2.classList.add('slide-up');
+                    section2.style.opacity = 1;
+                }, 100);
+                // 滚动到第二部分
+                setTimeout(() => {
+                    scrollToSection('section2');
+                }, 300);
+                // 按钮点击后移除动画效果
+                this.classList.remove('pulse');
+            });
+
+            document.getElementById('btn2').addEventListener('click', function() {
+                // 显示第三部分
+                const section3 = document.getElementById('section3');
+                section3.classList.remove('hidden');
+                // 更新已解锁部分计数
+                unlockedSections = 3;
+                // 更新位置信息
+                sectionPositions.section3 = section3.offsetTop;
+                // 添加动画
+                setTimeout(() => {
+                    section3.classList.add('slide-up');
+                    section3.style.opacity = 1;
+                }, 100);
+                // 滚动到第三部分
+                setTimeout(() => {
+                    scrollToSection('section3');
+                }, 300);
+                // 按钮点击后移除动画效果
+                this.classList.remove('pulse');
+            });
+
+            document.getElementById('btn3').addEventListener('click', function() {
+                // 显示第四部分
+                const section4 = document.getElementById('section4');
+                section4.classList.remove('hidden');
+                // 显示浮动爱心
+                document.getElementById('floatHeart').classList.remove('hidden');
+                // 更新已解锁部分计数
+                unlockedSections = 4;
+                // 更新位置信息
+                sectionPositions.section4 = section4.offsetTop;
+                // 添加动画
+                setTimeout(() => {
+                    section4.classList.add('slide-up');
+                    section4.style.opacity = 1;
+                }, 100);
+                // 滚动到第四部分
+                setTimeout(() => {
+                    scrollToSection('section4');
+                }, 300);
+                // 按钮点击后移除动画效果
+                this.classList.remove('pulse');
+            });
+
+            // 确认按钮事件
+            document.getElementById('yesBtn').addEventListener('click', function() {
+                document.getElementById('surprise').classList.remove('pointer-events-none');
+                document.getElementById('surprise').style.opacity = 1;
+                setTimeout(() => {
+                    document.getElementById('surpriseBox').style.transform = 'scale(1)';
+                }, 100);
+                
+                // 创建随机爱心
+                createHearts();
+                // 按钮点击后移除动画效果
+                this.classList.remove('pulse');
+            });
+
+            document.getElementById('noBtn').addEventListener('click', function() {
+                document.getElementById('comfort').classList.remove('pointer-events-none');
+                document.getElementById('comfort').style.opacity = 1;
+                setTimeout(() => {
+                    document.getElementById('comfortBox').style.transform = 'scale(1)';
+                }, 100);
+            });
+
+            // 关闭弹窗
+            document.getElementById('closeSurprise').addEventListener('click', function() {
+                document.getElementById('surpriseBox').style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    document.getElementById('surprise').style.opacity = 0;
+                    setTimeout(() => {
+                        document.getElementById('surprise').classList.add('pointer-events-none');
+                    }, 500);
+                }, 100);
+            });
+
+            document.getElementById('closeComfort').addEventListener('click', function() {
+                document.getElementById('comfortBox').style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    document.getElementById('comfort').style.opacity = 0;
+                    setTimeout(() => {
+                        document.getElementById('comfort').classList.add('pointer-events-none');
+                    }, 500);
+                }, 100);
+            });
+
+            // 浮动爱心点击事件
+            document.getElementById('floatHeart').addEventListener('click', function() {
+                scrollToSection('section4');
+            });
+
+            // 平滑滚动到指定区域
+            function scrollToSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                window.scrollTo({
+                    top: section.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+
+            // 创建随机爱心效果
+            function createHearts() {
+                const colors = ['#F87171', '#EC4899', '#A78BFA', '#FBBF24'];
+                const container = document.body;
+                
+                for (let i = 0; i < 50; i++) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '<i class="fa fa-heart"></i>';
+                    heart.className = 'fixed text-2xl pointer-events-none';
+                    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    heart.style.left = `${Math.random() * 100}%`;
+                    heart.style.top = `${Math.random() * 100}%`;
+                    heart.style.opacity = Math.random() * 0.8 + 0.2;
+                    heart.style.animation = `float ${Math.random() * 5 + 3}s ease-in-out infinite`;
+                    heart.style.animationDelay = `${Math.random() * 2}s`;
+                    heart.style.zIndex = '50';
+                    
+                    container.appendChild(heart);
+                    
+                    // 一段时间后移除爱心
+                    setTimeout(() => {
+                        heart.style.opacity = 0;
+                        heart.style.transition = 'opacity 1s ease-out';
+                        setTimeout(() => {
+                            container.removeChild(heart);
+                        }, 1000);
+                    }, 5000);
+                }
+            }
+
+            // 滚动限制逻辑：允许在已解锁内容范围内自由滚动，只阻止滚动到未解锁区域
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                const windowHeight = window.innerHeight;
+                
+                // 根据已解锁的部分设置最大滚动位置
+                let maxScroll;
+                if (unlockedSections === 1) {
+                    // 第一部分解锁时，最大滚动到第一部分底部
+                    maxScroll = sectionPositions.section1 + document.getElementById('section1').offsetHeight - windowHeight / 2;
+                } else if (unlockedSections === 2) {
+                    // 第二部分解锁时，最大滚动到第二部分底部
+                    maxScroll = sectionPositions.section2 + document.getElementById('section2').offsetHeight - windowHeight / 2;
+                } else if (unlockedSections === 3) {
+                    // 第三部分解锁时，最大滚动到第三部分底部
+                    maxScroll = sectionPositions.section3 + document.getElementById('section3').offsetHeight - windowHeight / 2;
+                }
+                
+                // 如果设置了最大滚动位置且当前滚动超过了最大位置
+                if (maxScroll !== undefined && currentScroll > maxScroll) {
+                    window.scrollTo({
+                        top: maxScroll,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
